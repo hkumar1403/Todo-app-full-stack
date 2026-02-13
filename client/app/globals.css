@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 antialiased flex items-center justify-center;
+  }
+}
+
+@layer components {
+  /* Main app container */
+  body > div.flex {
+    @apply w-full max-w-xl bg-slate-900/80 border border-slate-800/80 shadow-2xl shadow-slate-950/70 rounded-2xl px-6 sm:px-8 py-8 sm:py-10 mx-4 space-y-6;
+  }
+
+  /* Title injected via CSS so we don't touch JSX */
+  body > div.flex::before {
+    content: "My Tasks";
+    @apply block text-2xl sm:text-3xl font-semibold tracking-tight text-slate-50 mb-2;
+  }
+
+  /* Input + button row */
+  body > div.flex > div {
+    @apply w-full flex flex-col sm:flex-row gap-3 items-stretch sm:items-center;
+  }
+
+  body > div.flex input[type="text"] {
+    @apply w-full bg-slate-900/80 border border-slate-700/80 placeholder-slate-500 rounded-xl px-4 py-3 text-slate-100 shadow-inner shadow-slate-950/40
+    focus:outline-none focus:ring-2 focus:ring-blue-500/80 focus:border-blue-400/80 transition-all duration-200;
+  }
+
+  /* Primary button (Add) */
+  body > div.flex > div > button {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 px-5 py-3 text-sm font-semibold text-white
+    shadow-lg shadow-blue-900/40 hover:from-blue-400 hover:to-indigo-400 hover:shadow-blue-700/60
+    active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:ring-blue-500
+    transition-all duration-150;
+  }
+
+  /* Todo list container */
+  body > div.flex ul {
+    @apply mt-4 w-full space-y-3;
+  }
+
+  /* Empty state for list */
+  body > div.flex ul:empty::before {
+    content: "You have no tasks yet. Add your first todo above.";
+    @apply block text-sm text-slate-500 text-center py-8 border border-dashed border-slate-700/80 rounded-xl bg-slate-900/40;
+  }
+
+  /* Todo item */
+  body > div.flex li {
+    @apply flex items-center gap-3 rounded-xl bg-slate-900/70 border border-slate-800/80 px-4 py-3 text-sm shadow-sm shadow-slate-950/50
+    hover:border-blue-500/70 hover:bg-slate-900 transition-colors duration-150;
+  }
+
+  /* Completed todo visual treatment */
+  body > div.flex li.line-through {
+    @apply bg-slate-900/40 border-slate-800/60 text-slate-500;
+  }
+
+  /* Checkbox styling */
+  body > div.flex li input[type="checkbox"] {
+    @apply h-4 w-4 shrink-0 cursor-pointer appearance-none rounded-md border border-slate-600 bg-slate-900/70 flex items-center justify-center
+    checked:bg-gradient-to-br checked:from-emerald-400 checked:to-emerald-500 checked:border-transparent transition-colors duration-150;
+  }
+
+  body > div.flex li input[type="checkbox"]::before {
+    content: "✓";
+    @apply text-[0.7rem] font-semibold text-slate-950 opacity-0 transition-opacity duration-150;
+  }
+
+  body > div.flex li input[type="checkbox"]:checked::before {
+    @apply opacity-100;
+  }
+
+  /* Todo text spacing */
+  body > div.flex li input[type="checkbox"] + span,
+  body > div.flex li input[type="checkbox"] + * {
+    @apply text-slate-100;
+  }
+
+  /* Delete button */
+  body > div.flex li button {
+    @apply ml-auto inline-flex h-8 w-8 items-center justify-center rounded-full border border-transparent bg-slate-900/0 text-slate-500
+    hover:bg-red-500/10 hover:text-red-400 hover:border-red-500/40 transition-all duration-150;
+  }
+
+  body > div.flex li svg {
+    @apply h-4 w-4;
+  }
+}
