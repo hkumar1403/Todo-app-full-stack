@@ -30,9 +30,9 @@
 
   /* Primary button (Add) */
   body > div.flex > div > button {
-    @apply inline-flex items-center justify-center whitespace-nowrap rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 px-5 py-3 text-sm font-semibold text-white
-    shadow-lg shadow-blue-900/40 hover:from-blue-400 hover:to-indigo-400 hover:shadow-blue-700/60
-    active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 focus-visible:ring-blue-500
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-xl bg-[#16693c] px-5 py-3 text-sm font-bold text-white
+    shadow-lg shadow-blue-900/40
+    active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 
     transition-all duration-150;
   }
 
@@ -55,12 +55,12 @@
 
   /* Completed todo visual treatment */
   body > div.flex li.line-through {
-    @apply bg-slate-900/40 border-slate-800/60 text-slate-500;
+    @apply bg-white border-slate-800/60 text-slate-500;
   }
 
   /* Checkbox styling */
   body > div.flex li input[type="checkbox"] {
-    @apply h-4 w-4 shrink-0 cursor-pointer appearance-none rounded-md border border-slate-600 bg-slate-900/70 flex items-center justify-center
+    @apply h-6 w-6 shrink-0 cursor-pointer appearance-none rounded-full border border-slate-600 bg-slate-900/70 flex items-center justify-center
     checked:bg-gradient-to-br checked:from-emerald-400 checked:to-emerald-500 checked:border-transparent transition-colors duration-150;
   }
 

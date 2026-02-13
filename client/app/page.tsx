@@ -107,9 +107,9 @@ export default function Todo() {
           placeholder="Add a todo"
           onChange={(e) => setInput(e.target.value)}
         />
-        .
+
         <button
-          className="px-5 py-2 bg-blue-400 rounded-md"
+          className=" cursor-pointer px-6 py-2 bg-[#16693c] rounded-full font-black uppercase tracking-widest text-white active:shadow-none active:translate-y-0.75 transition-all duration-75 drop-shadow-[2px_12px_0_rgba(0,0,0,0.5)]"
           onClick={() => addTodo(input)}
         >
           Add
@@ -117,10 +117,11 @@ export default function Todo() {
       </div>
       <ul className="m-7">
         {todos.map((todo) => (
-          <li key={todo._id} className="cursor-pointer">
+          <li key={todo._id} className="cursor-pointer flex items-center gap-3">
             <input
               type="checkbox"
-              onClick={() => toggleTodo(todo._id, !todo.completed)}
+              checked={todo.completed}
+              onChange={() => toggleTodo(todo._id, !todo.completed)}
             />
             {todo.title}{" "}
             <button
