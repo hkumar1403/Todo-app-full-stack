@@ -33,9 +33,12 @@ export const createTodo = async (req: AuthRequest, res: Response) => {
 
 /// GET TODOS FUNCTION  ------->
 
-export const getTodos = async (req: Request, res: Response) => {
+export const getTodos = async (req: AuthRequest, res: Response) => {
+  const userId = req.userId!;
   try {
-    const todos = await TodoModel.find().sort({
+    const todos = await TodoModel.find({
+      user: new mongoose.Types.ObjectId(req.userId),
+    }).sort({
       createdAt: -1,
     });
 
