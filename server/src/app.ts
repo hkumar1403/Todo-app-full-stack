@@ -6,9 +6,20 @@ import authRoutes from "./routes/auth.routes";
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://todo-app-full-stack-eight.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "https://todo-app-full-stack-eight.vercel.app/",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   }),
 );
