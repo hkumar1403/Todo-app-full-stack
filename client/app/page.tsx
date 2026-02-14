@@ -15,9 +15,12 @@ export default function Todo() {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const res = await fetch("http://localhost:5001/api/todos", {
-          credentials: "include",
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/todos`,
+          {
+            credentials: "include",
+          },
+        );
 
         if (!res.ok) {
           throw new Error("Failed to fetch todos");
@@ -32,9 +35,12 @@ export default function Todo() {
 
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost:5001/api/auth/me", {
-          credentials: "include",
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/auth/me`,
+          {
+            credentials: "include",
+          },
+        );
 
         if (!res.ok) {
           router.push("/login");
@@ -54,7 +60,7 @@ export default function Todo() {
     if (!title.trim()) return;
 
     try {
-      const res = await fetch("http://localhost:5001/api/todos", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/todos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,14 +83,17 @@ export default function Todo() {
 
   async function toggleTodo(id: string, completed: boolean) {
     try {
-      const res = await fetch(`http://localhost:5001/api/todos/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/todos/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ completed }),
         },
-        credentials: "include",
-        body: JSON.stringify({ completed }),
-      });
+      );
 
       if (!res.ok) {
         throw new Error("Failed to update todo");
@@ -100,13 +109,16 @@ export default function Todo() {
 
   async function deleteTodo(id: string) {
     try {
-      const res = await fetch(`http://localhost:5001/api/todos/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/todos/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
         },
-        credentials: "include",
-      });
+      );
       if (!res.ok) {
         throw new Error("Failed to delete todo");
       }
@@ -121,12 +133,15 @@ export default function Todo() {
     if (!editingValue.trim()) return;
 
     try {
-      const res = await fetch(`http://localhost:5001/api/todos/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ title: editingValue }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/todos/${id}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ title: editingValue }),
+        },
+      );
 
       if (!res.ok) throw new Error("Failed to update");
 
