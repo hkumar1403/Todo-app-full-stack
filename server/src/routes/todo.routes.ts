@@ -1,4 +1,6 @@
 import express from "express";
+import { protect } from "../middleware/auth.middleware";
+
 import {
   createTodo,
   getTodos,
@@ -7,6 +9,7 @@ import {
 } from "../controllers/todo.controller";
 
 const router = express.Router();
+router.use(protect);
 
 router.post("/", createTodo);
 router.get("/", getTodos);

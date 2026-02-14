@@ -5,16 +5,19 @@ import { TodoItem } from "@/components/TodoItem";
 import { useEffect, useState } from "react";
 import type { Todo } from "@/types/interface";
 import { TodoList } from "@/components/TodoList";
+import { useRouter } from "next/navigation";
 
 export default function Todo() {
   const [todos, setTodos] = useState<Todo[]>([]);
-  // const [editingId, setEditingId] = useState<string | null>(null);
-  // const [editingValue, setEditingValue] = useState<string>("");
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const res = await fetch("http://localhost:5001/api/todos");
+        const res = await fetch("http://localhost:5001/api/todos", {
+          credentials: "include",
+        });
 
         if (!res.ok) {
           throw new Error("Failed to fetch todos");
@@ -27,7 +30,24 @@ export default function Todo() {
       }
     };
 
-    fetchTodos();
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("http://localhost:5001/api/auth/me", {
+          credentials: "include",
+        });
+
+        if (!res.ok) {
+          router.push("/login");
+          return;
+        }
+
+        fetchTodos(); // your existing function
+      } catch {
+        router.push("/login");
+      }
+    };
+
+    checkAuth();
   }, []);
 
   async function addTodo(title: string) {
@@ -39,6 +59,7 @@ export default function Todo() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ title }),
       });
 
@@ -61,6 +82,7 @@ export default function Todo() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ completed }),
       });
 
@@ -83,6 +105,7 @@ export default function Todo() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
       });
       if (!res.ok) {
         throw new Error("Failed to delete todo");
@@ -101,6 +124,7 @@ export default function Todo() {
       const res = await fetch(`http://localhost:5001/api/todos/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ title: editingValue }),
       });
 
