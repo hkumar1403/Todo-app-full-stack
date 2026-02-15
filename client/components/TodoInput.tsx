@@ -8,7 +8,7 @@ export const TodoInput = ({ onAdd }: TodoInputProps) => {
       <input
         type="text"
         value={input}
-        className="bg-white px-3 py-2 border-none placeholder-gray-400 rounded-md rounded-tr-l m-7 text-black"
+        className="bg-transparent p-4 outline-none placeholder-gray-400 border-none m-7 text-black focus:outline-none focus:border-b-2 "
         placeholder="Add a todo"
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => {
@@ -20,7 +20,7 @@ export const TodoInput = ({ onAdd }: TodoInputProps) => {
       />
 
       <button
-        className=" cursor-pointer px-6 py-2 bg-[#16693c] rounded-full font-black uppercase tracking-widest text-white active:shadow-none active:translate-y-0.75 transition-all duration-75 drop-shadow-[2px_12px_0_rgba(0,0,0,0.5)]"
+        className=" cursor-pointer px-8 py-4 bg-[#00c282] rounded-full font-black uppercase tracking-widest text-white active:shadow-none active:translate-y-0.75 transition-all duration-75 text-[14px]"
         onClick={() => {
           onAdd(input);
           setInput("");

@@ -15,6 +15,7 @@ export const TodoItem = ({
     <li className="cursor-pointer flex items-center gap-3">
       <input
         type="checkbox"
+        className="bg-transparent"
         checked={todo.completed}
         onChange={() => onToggle(todo._id, !todo.completed)}
       />
@@ -67,11 +68,15 @@ export const TodoItem = ({
         </>
       ) : (
         <>
-          <span className={todo.completed ? "line-through text-gray-400" : ""}>
+          <span
+            className={
+              todo.completed ? "line-through text-gray-400" : "text-gray-700"
+            }
+          >
             {todo.title}
           </span>
           <button
-            className="cursor-pointer"
+            className="cursor-pointer hover:bg-blue-200"
             onClick={(e) => {
               e.stopPropagation();
               setIsEditing(true);
@@ -82,7 +87,7 @@ export const TodoItem = ({
           </button>
 
           <button
-            className="cursor-pointer"
+            className="cursor-pointer hover:bg-red-200"
             onClick={(e) => {
               e.stopPropagation();
               onDelete(todo._id);

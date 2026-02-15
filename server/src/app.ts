@@ -6,7 +6,10 @@ import authRoutes from "./routes/auth.routes";
 
 const app = express();
 
-const allowedOrigins = ["https://todo-app-full-stack-eight.vercel.app"];
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://todo-app-full-stack-eight.vercel.app",
+];
 
 app.use(
   cors({
