@@ -9,9 +9,21 @@ export const TodoList = ({
   onUpdate,
 }: TodoListProps) => {
   return !todos.length ? (
-    <p className="text-gray-500 mt-4">No todos yet!</p>
+    <div
+      className="mt-6 bg-white border-4 border-black rounded-2xl 
+      shadow-[8px_8px_0px_#000] p-6 text-center"
+    >
+      <p className="text-xl font-extrabold text-black">No todos yet!</p>
+      <p className="text-sm font-semibold text-gray-600 mt-2">
+        Add one above and get moving 🚀
+      </p>
+    </div>
   ) : (
-    <ul>
+    <ul
+      className="mt-6 flex flex-col gap-6 
+      bg-white border-4 border-black rounded-2xl 
+      shadow-[12px_12px_0px_#000] p-6"
+    >
       {todos.map((todo) => (
         <TodoItem
           key={todo._id}

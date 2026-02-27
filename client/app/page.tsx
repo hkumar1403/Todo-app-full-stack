@@ -156,7 +156,7 @@ export default function Todo() {
   }
 
   return (
-    <div className="flex flex-col gap-4 p-10 align-baseline text-center justify-center h-screen bg-white">
+    <div className="flex flex-col gap-4 p-10 align-baseline text-center justify-center h-screen bg-amber-200">
       <TodoInput onAdd={addTodo} />
       <TodoList
         todos={todos}
